@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class SmurfForm extends Component {
   constructor(props) {
@@ -10,15 +12,41 @@ class SmurfForm extends Component {
     };
   }
 
-  addSmurf = event => {
-    event.preventDefault();
-    // add code to create the smurf using the api
+  componentDidMount() {
+    if(this.props.match) {
+      axios.get('http://localhost:3333/smurfs')
+        .then(res => {
+          const smurf = res.data.filter(smurf => `${smurf.id}` === this.props.match.params.id)[0];
+          this.setState({ ...smurf })
+        })
+        .catch(err => console.log(err.response));
+      }
+    }
 
+  addSmurf = state => {
+    // add code to create the smurf using the api
+    axios.post('http://localhost:3333/smurfs', state)
+      .then(res => this.props.updateList(res.data))
+      .catch(err => console.log(err.response));
+  }
+
+  updateSmurf = state => {
+    axios.put(`http://localhost:3333/smurfs/${state.id}`, state)
+      .then(res => this.props.updateList(res.data))
+      .catch(err => console.log(err.response));
+  }
+
+  handleSubmit = e => {
+    e.preventDefault();
+    this.props.match.params.id
+      ? this.updateSmurf(this.state)
+      : this.addSmurf(this.state);
     this.setState({
       name: '',
       age: '',
       height: ''
     });
+    this.props.history.push(`/`);
   }
 
   handleInputChange = e => {
@@ -28,7 +56,7 @@ class SmurfForm extends Component {
   render() {
     return (
       <div className="SmurfForm">
-        <form onSubmit={this.addSmurf}>
+        <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleInputChange}
             placeholder="name"
@@ -47,8 +75,14 @@ class SmurfForm extends Component {
             value={this.state.height}
             name="height"
           />
-          <button type="submit">Add to the village</button>
+          <button type="submit">
+            { this.props.match
+                ? 'Update Smurf'
+                : 'Add to the village'
+            }
+          </button>
         </form>
+        <Link to="/">Back to Home</Link>
       </div>
     );
   }
