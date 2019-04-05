@@ -27,7 +27,8 @@ class App extends Component {
   }
 
   updateList = data => {
-    this.setState({ smurfs: data })
+    this.setState({ smurfs: data });
+    console.log('updateList ran')
   }
 
   render() {
