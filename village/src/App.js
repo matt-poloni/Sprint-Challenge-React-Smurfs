@@ -26,6 +26,10 @@ class App extends Component {
     .catch(err => console.log(err.response));
   }
 
+  updateList = data => {
+    this.setState({ smurfs: data })
+  }
+
   render() {
     return (
       <div className="App">
@@ -50,13 +54,29 @@ class App extends Component {
         <Route
           exact path="/smurf/:id"
           render={props =>
-            <Smurf {...props} smurfs={this.state.smurfs} />
+            <Smurf
+              {...props}
+              smurfs={this.state.smurfs}
+              updateList={this.updateList}
+            />
+          }
+        />
+        <Route
+          exact path="/smurf/:id/update"
+          render={props =>
+            <SmurfForm
+              {...props}
+              updateList={this.updateList}
+            />
           }
         />
         <Route
           exact path="/smurf-form"
           render={props =>
-            <SmurfForm {...props} />
+            <SmurfForm
+              {...props}
+              updateList={this.updateList}
+            />
           }
         />
       </div>

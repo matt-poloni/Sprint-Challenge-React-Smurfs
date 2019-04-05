@@ -12,17 +12,29 @@ class SmurfForm extends Component {
     };
   }
 
+  componentDidMount() {
+    if(this.props.match) {
+      axios.get('http://localhost:3333/smurfs')
+        .then(res => {
+          const smurf = res.data.filter(smurf => `${smurf.id}` === this.props.match.params.id)[0];
+          this.setState({ ...smurf })
+        })
+        .catch(err => console.log(err.response));
+      }
+    }
+
   addSmurf = event => {
     event.preventDefault();
     // add code to create the smurf using the api
     axios.post('http://localhost:3333/smurfs', this.state)
-      .then(res => console.log(res))
+      .then(res => this.props.updateList(res.data))
       .catch(err => console.log(err.response));
     this.setState({
       name: '',
       age: '',
       height: ''
     });
+    this.props.history.push(`/`);
   }
 
   handleInputChange = e => {
