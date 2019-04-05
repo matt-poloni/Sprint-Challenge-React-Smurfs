@@ -28,9 +28,21 @@ In this challenge, you will create a Single Page Application complete with Clien
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
-- [ ] Explain the differences between `client-side routing` and `server-side routing`.
-- [ ] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
-- [ ] Mention three tools we can use to make AJAX requests.
+- [x] Explain the differences between `client-side routing` and `server-side routing`.
+
+* Server-side routing refreshes the page every time the server responds to a request. This is because the server is sending back the entire page to be rendered, regardless of whether or not some of the data/elements were already there. On the bright side, it only sends those elements/data that are needed at that time and, because every page is delivered from a different location, URLs are (basically) available automatically for any given page on a website.
+
+* Client-side routing, on the other hand, doesn't need the entire page to refresh every single time a user interacts with a page, so it only renders/re-renders those elements that need to be created/updated with navigation to any particular "page." Unfortunately, this does mean that URLs will only represent particular pages if you do a little extra work to make it so (e.g. React Router). Also, the site may need to store a little more data than one routed server-side due to the fact that it needs to be ready at any given point for any potential navigation by the user, all without refreshing the page, if possible (which it should be for almost all internal operations).
+
+- [x] Which HTTP methods can be mapped to the CRUD acronym that we use when interfacing with APIs/Servers.
+
+* POST (c)reates, GET (r)eads, PUT (u)pdates, and DELETE (d)eletes.
+
+- [x] Mention three tools we can use to make AJAX requests.
+
+* `axios.get`, `axios.post`, `axios.put`, and (even though the questions only asked for three) `axios.delete`).
+
+* If the question was actually asking for "axios and two other tools," then there's also Javascript's `fetch` API (which we covered) and `XMLHTTPRequest` (which I don't believe we covered).
 
 
 ## Project Set Up
