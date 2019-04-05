@@ -40,7 +40,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [x] Mention three tools we can use to make AJAX requests.
 
-* `axios.get`, `axios.post`, `axios.put`, and (even though the questions only asked for three) `axios.delete`).
+* `axios.get`, `axios.post`, `axios.put`, and (even though the question only asked for three) `axios.delete`.
 
 * If the question was actually asking for "axios and two other tools," then there's also Javascript's `fetch` API (which we covered) and `XMLHTTPRequest` (which I don't believe we covered).
 
