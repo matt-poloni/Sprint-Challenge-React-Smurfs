@@ -39,7 +39,7 @@ class SmurfForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.match.id
+    this.props.match.params.id
       ? this.updateSmurf(this.state)
       : this.addSmurf(this.state);
     this.setState({
