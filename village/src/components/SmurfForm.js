@@ -31,7 +31,6 @@ class SmurfForm extends Component {
   }
 
   updateSmurf = state => {
-    // add code to create the smurf using the api
     axios.put(`http://localhost:3333/smurfs/${state.id}`, state)
       .then(res => this.props.updateList(res.data))
       .catch(err => console.log(err.response));
